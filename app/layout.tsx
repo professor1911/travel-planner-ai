@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/toaster";
 
 import "./globals.css";
 
+
 const inter = Montserrat_Alternates({ weight: "500", subsets: ["cyrillic"] });
 
 export const metadata: Metadata = {
