@@ -5,9 +5,12 @@ const isProtectedRoute = createRouteMatcher([
   '/forum(.*)',
 ]);
 
-export default clerkMiddleware((auth, req) => {
+export default clerkMiddleware(async (auth, req) => {
   if (isProtectedRoute(req)) {
-    auth().protect();
+    const authObj = await auth();
+    if (!authObj.isAuthenticated) {
+      return authObj.redirectToSignIn();
+    }
   }
 });
 

@@ -22,12 +22,12 @@ export async function generatePlanAction(formData: formSchemaType) {
     api.plan.createEmptyPlan,
     {
       placeName,
-      noOfDays: (
+      noOfDays: datesOfTravel.from && datesOfTravel.to ? (
         differenceInDays(datesOfTravel.to, datesOfTravel.from) + 1
-      ).toString(),
+      ).toString() : "1",
       activityPreferences,
-      fromDate: datesOfTravel.from.getTime(),
-      toDate: datesOfTravel.to.getTime(),
+      fromDate: datesOfTravel.from?.getTime() || Date.now(),
+      toDate: datesOfTravel.to?.getTime() || Date.now(),
       companion,
       isGeneratedUsingAI: true,
     },
