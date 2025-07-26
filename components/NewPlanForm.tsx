@@ -31,10 +31,10 @@ const formSchema = z.object({
     .min(3, "Place name should be at least 3 character long"),
   datesOfTravel: z
     .object({
-      from: z.date(),
-      to: z.date(),
+      from: z.date().optional(),
+      to: z.date().optional(),
     })
-    .refine((data) => data.to >= data.from, {
+    .refine((data) => !data.from || !data.to || data.to >= data.from, {
       message: "End date cannot be before start date",
       path: ["to"], // Associates the error with the 'to' field
     }),

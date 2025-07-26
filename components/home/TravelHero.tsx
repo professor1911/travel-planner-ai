@@ -382,17 +382,16 @@ const TravelHero = () => {
         <foreignObject x="420" y="120" width="250" height="220">
           <div className="rounded-lg bg-blue-500/50" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", width: "100%", height: "100%" }}>
             <h1 className="text-2xl md:text-4xl font-semibold text-center tracking-wide leading-tight">
-
-              Travel Planner <span className="text-white">AI</span> is now
-              <br />
               <SparklesText sparklesCount={10} className="w-full text-white"
                 colors={{
                   first: "#000000",
                   second: "#ffffff",
                 }}
               >
-                Rutugo
+                Travel Planner AI
               </SparklesText>
+              <br />
+              <span className="text-lg">Your Smart Travel Companion</span>
             </h1>
           </div>
         </foreignObject>
