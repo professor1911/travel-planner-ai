@@ -10,17 +10,17 @@ export async function generateMetadata(
   {
     params,
   }: {
-    params: {planId: string};
+    params: Promise<{planId: string}>;
   },
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const id = params.planId;
+  const { planId } = await params;
   const token = await getAuthToken();
 
   try {
     const plan = await fetchQuery(
       api.plan.getSinglePlan,
-      {id: id as Id<"plan">, isPublic: true},
+      {id: planId as Id<"plan">, isPublic: true},
       {token}
     );
     return {
@@ -33,18 +33,22 @@ export async function generateMetadata(
   }
 }
 
-export default function RootLayout({
+interface LayoutProps {
+  children: React.ReactNode;
+  params: Promise<{planId: string}>;
+}
+
+export default async function RootLayout({
   children,
   params,
-}: {
-  children: React.ReactNode;
-  params: {planId: string};
-}) {
+}: LayoutProps) {
+  const { planId } = await params;
+  
   return (
     <>
       <Header isPublic={true} />
       <main className="flex min-h-[calc(100svh-4rem)] flex-col items-center bg-blue-50/40 dark:bg-background">
-        <PlanLayoutContent planId={params.planId} isPublic={true}>
+        <PlanLayoutContent planId={planId} isPublic={true}>
           {children}
         </PlanLayoutContent>
       </main>

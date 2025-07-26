@@ -20,7 +20,7 @@ const useAuth = () => {
     if (isLoading)
       return;
     if (!isAuthenticated) {
-      clerk.openSignIn({ afterSignInUrl: DASHBOARD_URL });
+      clerk.openSignIn();
       return;
     }
     router.push("/dashboard")

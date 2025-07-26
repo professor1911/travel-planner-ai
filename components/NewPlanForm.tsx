@@ -24,20 +24,13 @@ import { useToast } from "@/components/ui/use-toast";
 import CompanionControl from "@/components/plan/CompanionControl";
 import ActivityPreferences from "@/components/plan/ActivityPreferences";
 import DateRangeSelector from "@/components/common/DateRangeSelector";
+import { DateRange } from "react-day-picker";
 
 const formSchema = z.object({
   placeName: z
     .string({ required_error: "Please select a place" })
     .min(3, "Place name should be at least 3 character long"),
-  datesOfTravel: z
-    .object({
-      from: z.date(),
-      to: z.date(),
-    })
-    .refine((data) => data.to >= data.from, {
-      message: "End date cannot be before start date",
-      path: ["to"], // Associates the error with the 'to' field
-    }),
+  datesOfTravel: z.custom<DateRange>(),
   activityPreferences: z.array(z.string()),
   companion: z.optional(z.string()),
 });
@@ -65,10 +58,7 @@ const NewPlanForm = ({
       activityPreferences: [],
       companion: undefined,
       placeName: "",
-      datesOfTravel: {
-        from: undefined,
-        to: undefined,
-      },
+      datesOfTravel: undefined,
     },
   });
 
