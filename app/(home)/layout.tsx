@@ -36,10 +36,7 @@ export default function RootLayout({
   return (
     <>
       <Header />
-      <main className="flex h-[calc(100svh-4rem)] flex-col items-center justify-center bg-blue-50/40 p-10 mx-auto">
-        {children}
-      </main>
-
+      {children}
     </>
   );
 }
